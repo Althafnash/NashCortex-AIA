@@ -1,0 +1,264 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": ["Hi", "How are you?", "Is anyone there?", "Hello"],
+            "responses": ["Hello!", "Hi there!", "Greetings!"]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["Bye", "See you later", "Goodbye"],
+            "responses": ["Goodbye!", "See you later!"]
+        },
+        {
+            "tag": "name",
+            "patterns": ["what is your name", "what is ur name", "name"],
+            "responses": ["My name is NashBot sir"]
+        },
+        {
+            "tag": "Webserver",
+            "patterns": ["open server", "start server", "on server"],
+            "responses": ["Starting NashWebServer sir"]
+        },
+        {
+            "tag": "Bandwidth",
+            "patterns": ["show bandwidth", "whats my bandwidth", "what is my bandwidth"],
+            "responses": ["Loding ......"]
+        },
+        {
+            "tag": "webcam",
+            "patterns": ["open webcam", "open camera", "open cam" , "show face"],
+            "responses": ["Loding ......"]
+        },
+        {
+            "tag": "minecraft",
+            "patterns": ["open game", "open game", "open minecraft" , "minecraft"],
+            "responses": ["Openning Minecraft Mini Game sir"]
+        },
+        {
+            "tag": "Classification",
+            "patterns": ["define classification","what is classification","Give me a short description on classification"],
+            "responses": ["Grouping animals into different levels based on their common characteristics is known as classification"]
+        },
+        {
+            "tag": "Significance of Classification",
+            "patterns": ["what are the significance of classification","what is siginificance of classification","Give me a short description on the signifance of classification"],
+            "responses": ["Grouping animals into different levels based on their common characteristics is known as classification"]
+        },
+        {
+            "tag": "Displacement",
+            "patterns": ["what are the Displacement","what is Displacement","Give me a short description on Displacement"],
+            "responses": ["Describes how far an object moves from its initial position. It includes both magnitude and direction."]
+        },
+        {
+            "tag": "Final Velocity",
+            "patterns": ["what are the Final Velocity","what is Final Velocity","Give me a short description on Final Velocity"],
+            "responses": ["The speed of an object at the end of a time interval, factoring in initial velocity and acceleration."]
+        },
+        {
+            "tag": "Velocity",
+            "patterns": ["what are the Velocity","what is Velocity","Give me a short description on Velocity"],
+            "responses": ["The rate at which an object changes its position, a vector quantity with both speed and direction."]
+        },
+        {
+            "tag": "Acceleration ",
+            "patterns": ["what are the Acceleration ","what is Acceleration ","Give me a short description on Acceleration "],
+            "responses": ["The rate at which an object’s velocity changes over time."]
+        },
+        {
+            "tag": "Newton’s 2nd Law of Motion",
+            "patterns": ["what are the Newton’s 2nd Law of Motion","what is Newton’s 2nd Law of Motion","Give me a short description on Newton’s 2nd Law of Motion"],
+            "responses": ["The force needed to accelerate an object is proportional to its mass and acceleration."]
+        },
+        {
+            "tag": "Force ",
+            "patterns": ["what are the Force ","what is Force ","Give me a short description on Force "],
+            "responses": ["A push or pull on an object that causes it to accelerate."]
+        },
+        {
+            "tag": "Weight  ",
+            "patterns": ["what are the Weight  ","what is Weight  ","Give me a short description on Weight "],
+            "responses": ["The force of gravity acting on an object’s mass."]
+        },
+        {
+            "tag": "Momentum  ",
+            "patterns": ["what are the Momentum  ","what is Momentum  ","Give me a short description on Momentum "],
+            "responses": ["The product of an object's mass and velocity, representing how much motion it has."]
+        },
+        {
+            "tag": "Impulse  ",
+            "patterns": ["what are the Impulse  ","what is Impulse  ","Give me a short description on Impulse "],
+            "responses": ["The change in momentum of an object when a force is applied over time."]
+        },
+        {
+            "tag": "Work  ",
+            "patterns": ["what are the Work  ","what is Work  ","Give me a short description on Work "],
+            "responses": ["The energy transferred when a force moves an object over a distance."]
+        },
+        {
+            "tag": "Kinetic Energy ",
+            "patterns": ["what are the Kinetic Energy ","what is Kinetic Energy ","Give me a short description on Kinetic Energy "],
+            "responses": ["The energy an object possesses due to its motion."]
+        },
+        {
+            "tag": "Potential Energy ",
+            "patterns": ["what are the Potential Energy ","what is Potential Energy ","Give me a short description on Potential Energy "],
+            "responses": ["The energy stored in an object due to its position (like height in a gravitational field)."]
+        },
+        {
+            "tag": "Mechanical Energy ",
+            "patterns": ["what are the Mechanical Energy ","what is Mechanical Energy ","Give me a short description on Mechanical Energy "],
+            "responses": ["The total energy (kinetic + potential) an object has."]
+        },
+        {
+            "tag": "Power  ",
+            "patterns": ["what are the Power  ","what is Power  ","Give me a short description on Power "],
+            "responses": ["The rate at which work is done or energy is transferred."]
+        },
+        {
+            "tag": "Gravitational Force  ",
+            "patterns": ["what are the Gravitational Force  ","what is Gravitational Force  ","Give me a short description on Gravitational Force   "],
+            "responses": ["The attractive force between two masses."]
+        },
+        {
+            "tag": "Gravitational Potential Energy ",
+            "patterns": ["what are the Gravitational Potential Energy ","what is Gravitational Potential Energy ","Give me a short description on Force "],
+            "responses": ["The energy an object has due to its position in a gravitational field."]
+        },
+        {
+            "tag": "Acceleration due to Gravity ",
+            "patterns": ["what are the Acceleration due to Gravity ","what is Acceleration due to Gravity ","Give me a short description on Acceleration due to Gravity "],
+            "responses": ["The rate of acceleration for an object in free fall near Earth’s surface."]
+        },
+        {
+            "tag": "Centripetal Force ",
+            "patterns": ["what are the Centripetal Force ","what is Centripetal Force ","Give me a short description on Centripetal Force  "],
+            "responses": ["A push or pull on an object that causes it to accelerate."]
+        },
+        {
+            "tag": "Angular Velocity ",
+            "patterns": ["what are the Angular Velocity ","what is Angular Velocity ","Give me a short description on Angular Velocity "],
+            "responses": ["The rate at which an object rotates around a point or axis."]
+        },
+        {
+            "tag": "Tangential Velocity ",
+            "patterns": ["what are the Tangential Velocity ","what is Tangential Velocity ","Give me a short description on Tangential Velocity  "],
+            "responses": ["The speed of an object moving along a circular path at a particular radius."]
+        },
+        {
+            "tag": "Displacement  ",
+            "patterns": ["what are the Displacement  ","what is Displacement  ","Give me a short description on Displacement "],
+            "responses": ["The distance of an oscillating object from its equilibrium position."]
+        },
+        {
+            "tag": "Period  ",
+            "patterns": ["what are the Period  ","what is Period  ","Give me a short description on Force "],
+            "responses": ["The time taken for one complete oscillation or cycle."]
+        },
+        {
+            "tag": "Potential Energy ",
+            "patterns": ["what are the Potential Energy ","what is Potential Energy ","Give me a short description on Potential Energy "],
+            "responses": ["Energy stored in the system at maximum displacement in simple harmonic motion."]
+        },
+        {
+            "tag": "First Law of Thermodynamics ",
+            "patterns": ["what are the First Law of Thermodynamics ","what is First Law of Thermodynamics ","Give me a short description on First Law of Thermodynamics "],
+            "responses": ["Energy in a system is conserved; it can change forms but not be created or destroyed."]
+        },
+        {
+            "tag": "Ideal Gas Law ",
+            "patterns": ["what are the Ideal Gas Law ","what is Ideal Gas Law ","Give me a short description on Ideal Gas Law  "],
+            "responses": ["Describes the behavior of an ideal gas in terms of pressure, volume, and temperature."]
+        },
+        {
+            "tag": "Heat  ",
+            "patterns": ["what are the Heat  ","what is Heat  ","Give me a short description on Heat "],
+            "responses": ["Energy transferred between objects due to a temperature difference."]
+        },
+        {
+            "tag": "Work Done by a Gas ",
+            "patterns": ["what are the Work Done by a Gas ","what is Work Done by a Gas ","Give me a short description on Work Done by a Gas "],
+            "responses": ["The work performed by a gas when it expands or compresses."]
+        },
+        {
+            "tag": "Coulomb’s Law ",
+            "patterns": ["what are the Coulomb’s Law ","what is Coulomb’s Law ","Give me a short description on Force "],
+            "responses": ["Describes the electric force between two charged objects."]
+        },
+        {
+            "tag": "Electric Field ",
+            "patterns": ["what are the Electric Field ","what is Electric Field ","Give me a short description on Coulomb’s Law "],
+            "responses": ["The force per unit charge exerted by a charged object."]
+        },
+        {
+            "tag": "Electric Potential Energy ",
+            "patterns": ["what are the Electric Potential Energy ","what is Electric Potential Energy ","Give me a short description on Electric Potential Energy "],
+            "responses": ["The energy a charge has due to its position in an electric field."]
+        },
+        {
+            "tag": "Capacitance  ",
+            "patterns": ["what are the Capacitance  ","what is Capacitance  ","Give me a short description on Capacitance "],
+            "responses": ["The ability of a system to store electric charge per unit voltage."]
+        },
+        {
+            "tag": "Ohm’s Law ",
+            "patterns": ["what are the Ohm’s Law ","what is Ohm’s Law ","Give me a short description on Ohm’s Law "],
+            "responses": ["The relationship between voltage, current, and resistance in an electrical circuit."]
+        },
+        {
+            "tag": "Power  ",
+            "patterns": ["what are the Power  ","what is Power  ","Give me a short description on Power "],
+            "responses": ["The rate at which electrical energy is used or generated."]
+        },
+        {
+            "tag": "Wave Speed  ",
+            "patterns": ["what are the Wave Speed  ","what is Wave Speed  ","Give me a short description on Wave Speed  "],
+            "responses": ["The speed at which a wave propagates through a medium."]
+        },
+        {
+            "tag": "Frequency ",
+            "patterns": ["what are the Frequency ","what is Frequency ","Give me a short description on Frequency "],
+            "responses": ["The number of complete wave cycles that pass a point in a given time period."]
+        },
+        {
+            "tag": "Doppler Effect ",
+            "patterns": ["what are the Doppler Effect ","what is Doppler Effect ","Give me a short description on Doppler Effect  "],
+            "responses": ["The change in frequency or wavelength of a wave as observed by someone moving relative to the wave source."]
+        },
+        {
+            "tag": "Snell's Law ",
+            "patterns": ["what are the Snell's Law ","what is Snell's Law ","Give me a short description on Snell's Law "],
+            "responses": ["Describes how light bends when passing between two materials with different refractive indices."]
+        },
+        {
+            "tag": "Lens Formula ",
+            "patterns": ["what are the Lens Formula ","what is Lens Formula ","Give me a short description on Lens Formula "],
+            "responses": ["Relates the focal length of a lens to the object distance and the image distance."]
+        },
+        {
+            "tag": "Magnification  ",
+            "patterns": ["what are the Magnification  ","what is Magnification  ","Give me a short description on Magnification  "],
+            "responses": ["The ratio of the image height to the object height, describing how much an image is enlarged."]
+        },
+        {
+            "tag": "ForcMagnification e ",
+            "patterns": ["what are the Magnification  ","what is Magnification  ","Give me a short description on Magnification  "],
+            "responses": ["The ratio of the image height to the object height, describing how much an image is enlarged."]
+        },
+        {
+            "tag": "Einstein’s Mass-Energy Relation ",
+            "patterns": ["what are the Einstein’s Mass-Energy Relation ","what is Einstein’s Mass-Energy Relation ","Give me a short description on Einstein’s Mass-Energy Relation "],
+            "responses": ["Describes how mass can be converted into energy and vice versa."]
+        },
+        {
+            "tag": "Photoelectric Effect ",
+            "patterns": ["what are the Photoelectric Effect ","what is Photoelectric Effect ","Give me a short description on Photoelectric Effect "],
+            ",responses": ["The emission of electrons from a material when it absorbs light energy."]
+        },
+        {
+            "tag": "De Broglie Wavelength ",
+            "patterns": ["what are the De Broglie Wavelength ","what is De Broglie Wavelength ","Give me a short description on De Broglie Wavelength "],
+            "responses": ["The wavelength associated with a particle due to its momentum, central to quantum mechanics."]
+        }
+    ]
+}
