@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NashCoretxt Docs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Jersey+10&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+        @import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Global Styles */
+        
+        h1 {
+            font-size: 50px;
+            line-height: 64px;
+            color: #5e9fef;
+        }
+        
+        h2 {
+        font-size: 46px;
+            line-height: 54px;
+            color: #088178;
+        }
+        
+        h4 {
+            font-size: 20px;
+            color: #114054;
+        }
+        
+        h6 {
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        p {
+            font-size: 16px;
+            color: #04a6f7;
+            margin: 15px 0 20px 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        nav {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: #333;
+        }
+        nav a{
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        #main {
+            display: flex;
+            flex: 1;
+        }
+        #docs {
+            width: 10%;
+            display: flex;
+        }
+        #navbar {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 10px 0;
+        }
+        #body {
+            flex: 1;
+            padding: 20px;
+            font-size: 25px;
+            overflow-y: auto;
+        }
+        #links a {
+            text-decoration: none;
+            color: black;
+            font-size: 25px;
+            font-weight: 700;
+        }
+        #logo{
+            font-size: 50px;
+            font-weight: 700;
+            margin-right:  700px; 
+        }
+        .topnav,
+        #navbar{
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a,
+        #navbar a{
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover ,
+        #navbar a:hover{
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active ,
+        #navbar a.active{
+            background-color: #04a6f7;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <p id="logo">NashCoretxt</p>
+        
+        <div class="topnav">
+            <a class="active" href="http://localhost:8000/">Home</a>
+            <a href="http://localhost:8000/commands">Commands</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+          </div>
+    </nav>
+    <div id="main">
+        <section id="docs">
+            <section id="navbar">
+                <a href="http://localhost:8000/" class="active">Overview</a>
+                <a href="http://localhost:8000/commands">Commands</a>
+            </section>
+        </section>
+        <section id="body">
+            <h1>Commands</h1>
+            <p>You should say this commands out loud</p>
+            <ul>
+                <li>jarvis start srever</li>
+                <li>jarvis what is my bandwidth</li>
+                <li>jarvis open game</li>
+                <li>jarvis what is the time</li>
+            </ul>
+    </div>
+</body>
+</html>
+
+

@@ -99,9 +99,8 @@ def main():
         
         if command == "quit":
             break
-        
-        if 'server' in command:
-            sub.run('node web_server.js', check=True)
+        elif 'server' in command:
+            sub.run('npm start', shell=True)
         elif 'bandwidth' in command: 
             bandwidth()
         elif any(word in command for word in ['game', 'minecraft']):
