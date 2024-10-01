@@ -108,6 +108,9 @@ def main():
             Clock()
         elif 'interface' in command:
             sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/Webchatbot.py',shell=True)
+        elif 'web crawler' in command:
+            sub.run('cd search',shell=True)
+            sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/search/webCrawler.py', shell=True)
         else:
             if command:  
                 ints = predict_class(command)
