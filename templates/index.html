@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #323639;
+        }
+        .chat-container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: black;
+        }
+        .messages {
+            height: 500px;
+            border: 1px solid #ddd;
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+        .user-message, .bot-message {
+            margin: 10px 0;
+        }
+        .user-message {
+            text-align: right;
+            color: blue;
+        }
+        .bot-message {
+            text-align: left;
+            color: green;
+        }
+        button{
+            border-radius: 10%;
+            margin: 20px;
+            width: 10%;
+            height: 50px;
+        }
+        input{
+            width: 90%;
+            margin: 20px;
+        }
+    </style>
+    <script>
+        async function sendMessage() {
+            const message = document.getElementById('message').value;
+            if (message.trim() === '') return;  // Prevent empty messages
+
+            // Add the user's message to the chat log
+            const chatLog = document.getElementById('chat-log');
+            const userMessage = document.createElement('p');
+            userMessage.classList.add('user-message');
+            userMessage.innerText = "You: " + message;
+            chatLog.appendChild(userMessage);
+
+            // Send the message to the backend (Flask server)
+            const response = await fetch('/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            });
+            const data = await response.json();
+
+            // Add the bot's response to the chat log
+            const botMessage = document.createElement('p');
+            botMessage.classList.add('bot-message');
+            botMessage.innerText = "Bot: " + data.response;
+            chatLog.appendChild(botMessage);
+
+            // Clear the input field
+            document.getElementById('message').value = '';
+
+            // Scroll to the bottom of the chat log
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Chatbot Interface</h1>
+        <div class="messages" id="chat-log"></div>
+        <input type="text" id="message" placeholder="Enter your message" autofocus>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</body>
+</html>

@@ -61,7 +61,7 @@ def get_response(intents_list, intents_json):
 
 sub.run("cls", shell=True)
 string = strftime('%H:%M %p')
-talk("welcome back sir " + "the time is " + string)
+talk("Welcome back, sir. The time is " + string)
 print("=================================================================")
 print("Welcome back sir")
 print("=================================================================")
@@ -78,10 +78,9 @@ def speechrecogniction():
             listener.adjust_for_ambient_noise(source, duration=1)
             voice = listener.listen(source, timeout=5, phrase_time_limit=10)
             command = listener.recognize_google(voice)
-            command = str(command)
-            command = command.lower() 
+            command = str(command).lower()  # Convert command to lowercase
             if 'jarvis' in command:
-                command = command.replace("jarvis", "") 
+                command = command.replace("jarvis", "").strip()  # Remove "jarvis" and trim spaces
     except sr.UnknownValueError:
         print("Sorry, I did not understand the command.")
         talk("Sorry, I did not understand the command.")
@@ -107,6 +106,8 @@ def main():
             Minecraft()
         elif any(word in command for word in ['time', 'show time', 'whats the time', 'tell the time']):
             Clock()
+        elif 'interface' in command:
+            sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/Webchatbot.py',shell=True)
         else:
             if command:  
                 ints = predict_class(command)
