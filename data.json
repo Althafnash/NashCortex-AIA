@@ -261,8 +261,8 @@
             "responses": ["The wavelength associated with a particle due to its momentum, central to quantum mechanics."]
         },
         {
-            "tags":"quotes",
-            "patterns":[],
+            "tag":"quotes",
+            "patterns":["Give me a quote"],
             "responses":
             [
                 "“Be yourself; everyone else is already taken.”",
@@ -301,20 +301,7 @@
                 "“Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.”",
                 "“There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.”",
                 "“It does not do to dwell on dreams and forget to live.”",
-                "“Good friends, good books, and a sleepy conscience: this is the ideal life.”",
-                "“As he read, I fell in love the way you fall asleep: slowly, and then all at once.”",
-                "“We are all in the gutter, but some of us are looking at the stars.”",
-                "“Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.”",
-                "“It is better to remain silent at the risk of being thought a fool, than to talk and remove all doubt of it.”",
-                "“The fool doth think he is wise, but the wise man knows himself to be a fool.”",
-                "“Whenever you find yourself on the side of the majority, it is time to reform (or pause and reflect).”",
-                "“Life is what happens to us while we are making other plans.”",
-                "“Yesterday is history, tomorrow is a mystery, today is a gift of God, which is why we call it the present.”",
-                "“I have not failed. I've just found 10,000 ways that won't work.”",
-                "“It is not a lack of love, but a lack of friendship that makes unhappy marriages.”",
-                "“The opposite of love is not hate, it's indifference. The opposite of art is not ugliness, it's indifference. The opposite of faith is not heresy, it's indifference. And the opposite of life is not death, it's indifference.”",
-                "“A woman is like a tea bag; you never know how strong it is until it's in hot water.”",
-                "“The man who does not read has no advantage over the man who cannot read.”"
+                "“Good friends, good books, and a sleepy conscience: this is the ideal life.”"
             ]
         }
     ]

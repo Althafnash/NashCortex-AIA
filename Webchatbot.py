@@ -24,7 +24,9 @@ def talk(text):
 
 # Load necessary files
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('data.json').read())
+# Load necessary files with utf-8 encoding
+with open('data.json', encoding='utf-8') as f:
+    intents = json.load(f)
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 model = load_model('chatbot_model.h5')
