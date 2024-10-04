@@ -11,6 +11,7 @@ from Bandwidth import bandwidth
 from webcam import face
 import pyttsx3
 from MiniGame import Minecraft
+import pywhatkit_utils as pwk
 from clock import Clock
 import speech_recognition as sr
 import time
@@ -22,7 +23,11 @@ def talk(text):
 
 # Load necessary files
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('data.json').read())
+import json
+
+# Open the JSON file with UTF-8 encoding
+with open('data.json', encoding='utf-8') as file:
+    intents = json.load(file)
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 model = load_model('chatbot_model.h5')
@@ -111,6 +116,16 @@ def main():
         elif 'url locator' in command:
             sub.run('cd search',shell=True)
             sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/search/webCrawler.py', shell=True)
+        elif 'youtube' in command:
+            pwk.Search_on_Youtube()
+        elif 'send email' in command:
+            pwk.Mail()
+        elif 'handwritting' in command:
+            pwk.Handwritting()
+        elif 'google' in command:
+            pwk.search()
+        elif 'whatsapp' in command:
+            pwk.Whatsapp_msg()
         else:
             if command:  
                 ints = predict_class(command)
