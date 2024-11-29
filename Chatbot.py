@@ -13,6 +13,7 @@ import pyttsx3
 from MiniGame import Minecraft
 import pywhatkit_utils as pwk
 from clock import Clock
+from WSL import NMAP
 import speech_recognition as sr
 import time
 
@@ -107,25 +108,37 @@ def main():
             sub.run('npm start', shell=True)
         elif 'bandwidth' in command: 
             bandwidth()
+            main()
         elif any(word in command for word in ['game', 'minecraft']):
             Minecraft()
+            main()
         elif any(word in command for word in ['time', 'show time', 'whats the time', 'tell the time']):
             Clock()
         elif 'interface' in command:
             sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/Webchatbot.py',shell=True)
+            main()
         elif 'url locator' in command:
             sub.run('cd search',shell=True)
             sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/search/webCrawler.py', shell=True)
+            main()
         elif 'youtube' in command:
             pwk.Search_on_Youtube()
+            main()
         elif 'send email' in command:
             pwk.Mail()
+            main()
         elif 'handwritting' in command:
             pwk.Handwritting()
+            main()
         elif 'google' in command:
             pwk.search()
+            main()
         elif 'whatsapp' in command:
             pwk.Whatsapp_msg()
+            main()
+        elif "scan network" in command:
+            NMAP()
+            main()
         else:
             if command:  
                 ints = predict_class(command)

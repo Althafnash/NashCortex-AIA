@@ -12,6 +12,7 @@ lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('data.json').read())
 
 # Preprocess the data
+# Classes are the intents
 words = []
 classes = []
 documents = []
