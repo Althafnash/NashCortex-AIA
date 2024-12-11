@@ -15,6 +15,7 @@ import pywhatkit_utils as pwk
 from clock import Clock
 from WSL import NMAP
 import speech_recognition as sr
+from OTXCLI.OTXCLI import OTXCLI_App
 import time
 
 def talk(text):
@@ -138,6 +139,29 @@ def main():
             main()
         elif "scan network" in command:
             NMAP()
+            main()
+        elif "security tools" in command:
+            talk("Starting OTXCLI") 
+            cli = OTXCLI_App()
+            print('''
+                1. Ip Adresses 
+                2. Domain_name
+                3. URL
+                4. Hostname
+            ''')
+            Input = input("What do you want to scan/search : ")
+            if 'ip' in Input:
+                IP = input('Enter the IP Adresss : ')
+                cli.process_ip(IP)
+            elif 'Domain' in  Input:
+                Domain_name = input('Enter the IP Adresss : ')
+                cli.process_ip(Domain_name)
+            elif 'URL' in Input:
+                URL = input('Enter the IP Adresss : ')
+                cli.process_ip(URL)
+            elif 'Hostname' in Input:
+                Hostname = input('Enter the IP Adresss : ')
+                cli.process_ip(Hostname)
             main()
         else:
             if command:  
