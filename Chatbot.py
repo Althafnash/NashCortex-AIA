@@ -1,6 +1,7 @@
 import json
 import numpy as np  
 import random
+import subprocess as sub
 import pickle
 import subprocess as sub
 import nltk
@@ -16,6 +17,7 @@ from clock import Clock
 from WSL import NMAP
 import speech_recognition as sr
 from OTXCLI.OTXCLI import OTXCLI_App
+from DDOS import SISP,SIMP,MISP,MIMP
 import time
 
 def talk(text):
@@ -163,11 +165,31 @@ def main():
                 Hostname = input('Enter the IP Adresss : ')
                 cli.process_ip(Hostname)
             main()
+        elif 'start firewall' in command:
+            sub.run('cd Firewall',shell=True)
+            sub.run(' python Firewall\_UI.py   ',shell=True)
+        elif 'Start Denial of Service attack':
+            print('''
+                1. SISP - Single IP Source Port Flood
+                2. SIMP - Single IP Source Ports Flood
+                3. MISP - Multiple Random Source IPs Flood
+                4. MIMP - Multiple Random Source IPs and Source Ports Flood
+                eg : MIMP
+            ''')
+            DDOS = input("which Dos attack would like to try : ")
+            if 'SISP' in DDOS:
+                SISP()
+            elif 'SIMP' in DDOS:
+                SIMP()
+            elif 'MISP' in DDOS:
+                MISP()
+            elif 'MIMP' in DDOS:
+                MIMP()
         else:
             if command:  
                 ints = predict_class(command)
                 res = get_response(ints, intents)
-                talk(res)
+                talk(res)        
                 print(res)
 
         time.sleep(2)  
