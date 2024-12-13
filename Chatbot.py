@@ -19,6 +19,7 @@ from OTXCLI.OTXCLI import OTXCLI_App
 from DOS import SISP, SIMP, MISP, MIMP
 from Encryption import encrypt
 from TCPScanner import run
+from PortScanner import port_scanner,Live_port_scanner,Detailed_port_scanner
 import time
 
 # Initialize text-to-speech
@@ -187,6 +188,19 @@ def main():
         elif 'start the tcp scanner' in command:
             run()
 
+        elif 'Start Port scanner' in command:
+            print('''
+                1. PortScanner - Normal Port scanner 
+                2. DetailedPortScaner - A detailed Port scanner which scans everything 
+                3. LivePortScanner - This scans the port live 
+            ''')
+            Input = input('Which port should I use : ')
+            if 'PortScanner' in command:
+                port_scanner()
+            elif 'DetailedPortScaner' in command:
+                Detailed_port_scanner()
+            elif 'LivePortScanner' in  command:
+                Live_port_scanner()
         else:
             # Default response if no specific command is found
             if command:  
