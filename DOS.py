@@ -1,15 +1,15 @@
 import random
 from scapy.all import IP, TCP, send
 
-source_IP = input("Enter IP address of Source: ")
-target_IP = input("Enter IP address of Target: ")
-source_port = int(input("Enter Source Port Number:"))
 i = 1  # Initialize packet counter
 
 # Single IP Source Port Flood
 #  Sends a stream of TCP packets from the user-specified source IP to the target IP, 
 # using the specified source port and destination port 80 (standard for HTTP).
 def SISP():
+    source_IP = input("Enter IP address of Source: ")
+    target_IP = input("Enter IP address of Target: ")
+    source_port = int(input("Enter Source Port Number:"))
     global i  # Use the global counter i
     packet_count = 0  # Initialize packet counter
     while packet_count < 10:
@@ -28,6 +28,9 @@ def SISP():
 # Sends packets from the user-specified source IP to the target IP,
 # but this time it cycles through all possible source port numbers (from 1 to 65534).
 def SIMP():
+    source_IP = input("Enter IP address of Source: ")
+    target_IP = input("Enter IP address of Target: ")
+    source_port = int(input("Enter Source Port Number:"))
     global i  # Use the global counter i
     packet_count = 0  # Initialize packet counter
     while packet_count < 10:
@@ -49,6 +52,9 @@ def SIMP():
 # Sends packets using random source IPs (within the range 1.1.1.1 to 254.254.254.254) to the target IP. 
 # This simulates a distributed source (DDoS-like) attack where many different IPs flood the target.
 def MISP():
+    source_IP = input("Enter IP address of Source: ")
+    target_IP = input("Enter IP address of Target: ")
+    source_port = int(input("Enter Source Port Number:"))
     global i  # Use the global counter i
     packet_count = 0  # Initialize packet counter
     while packet_count < 10:
@@ -72,6 +78,9 @@ def MISP():
 #  This combines both random source IPs and cycling through all possible source port numbers (from 1 to 65534), 
 # sending packets to the target IP.
 def MIMP():
+    source_IP = input("Enter IP address of Source: ")
+    target_IP = input("Enter IP address of Target: ")
+    source_port = int(input("Enter Source Port Number:"))
     global i  # Use the global counter i
     packet_count = 0  # Initialize packet counter
     while packet_count < 10:
