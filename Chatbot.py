@@ -1,5 +1,5 @@
 import json
-import numpy as np  
+import numpy as np
 import random
 import pickle
 import subprocess as sub
@@ -16,37 +16,36 @@ from clock import Clock
 from WSL import NMAP
 import speech_recognition as sr
 from OTXCLI.OTXCLI import OTXCLI_App
-from DOS import SISP,SIMP,MISP,MIMP
+from DOS import SISP, SIMP, MISP, MIMP
+from Encryption import encrypt
+from TCPScanner import run
 import time
 
+# Initialize text-to-speech
 def talk(text):
     speak = pyttsx3.init()
     speak.say(text)
     speak.runAndWait()
 
-# Load necessary files
+# Load necessary files for chatbot
 lemmatizer = WordNetLemmatizer()
-import json
-
-# Open the JSON file with UTF-8 encoding
 with open('data.json', encoding='utf-8') as file:
     intents = json.load(file)
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 model = load_model('chatbot_model.h5')
 
+# Helper functions for NLP processing
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
-    sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
-    return sentence_words
+    return [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
 
 def bag_of_words(sentence, words):
     sentence_words = clean_up_sentence(sentence)
     bag = [0] * len(words)
     for w in sentence_words:
-        for i, word in enumerate(words):
-            if word == w:
-                bag[i] = 1
+        if w in words:
+            bag[words.index(w)] = 1
     return np.array(bag)
 
 def predict_class(sentence):
@@ -54,41 +53,29 @@ def predict_class(sentence):
     res = model.predict(np.array([bow]))[0]
     ERROR_THRESHOLD = 0.25
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
-
     results.sort(key=lambda x: x[1], reverse=True)
-    return_list = []
-    for r in results:
-        return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
-    return return_list
+    return [{"intent": classes[r[0]], "probability": str(r[1])} for r in results]
 
 def get_response(intents_list, intents_json):
     tag = intents_list[0]['intent']
     for i in intents_json['intents']:
         if i['tag'] == tag:
             return random.choice(i['responses'])
+    return "Sorry, I didn't get that."
 
-sub.run("cls", shell=True)
-string = strftime('%H:%M %p')
-talk("Welcome back, sir. The time is " + string)
-print("=================================================================")
-print("Welcome back sir")
-print("=================================================================")
-print("Bot is running... (type 'quit' to exit or ctrl/cmd + c)")
-print("=================================================================")
-
+# Speech recognition
 listener = sr.Recognizer()
 
-def speechrecogniction():
+def speechrecognition():
     command = ""
     try:
         with sr.Microphone() as source:
             print("You can start talking ...")
-            listener.adjust_for_ambient_noise(source, duration=1)
+            listener.adjust_for_ambient_noise(source, duration=2)  # Adjust ambient noise
             voice = listener.listen(source, timeout=5, phrase_time_limit=10)
-            command = listener.recognize_google(voice)
-            command = str(command).lower()  # Convert command to lowercase
+            command = listener.recognize_google(voice).lower()
             if 'jarvis' in command:
-                command = command.replace("jarvis", "").strip()  # Remove "jarvis" and trim spaces
+                command = command.replace("jarvis", "").strip()
     except sr.UnknownValueError:
         print("Sorry, I did not understand the command.")
         talk("Sorry, I did not understand the command.")
@@ -100,96 +87,116 @@ def speechrecogniction():
         talk("An error occurred. Please try again.")
     return command
 
+# Main function
 def main():
+    sub.run("cls", shell=True)
+    string = strftime('%H:%M %p')
+    talk(f"Welcome back, sir. The time is {string}")
+    print("=================================================================")
+    print("Welcome back sir")
+    print("=================================================================")
+    print("Bot is running... (type 'quit' to exit or ctrl/cmd + c)")
+    print("=================================================================")
+
     while True:
-        command = speechrecogniction()
-        
+        command = speechrecognition()
+
         if command == "quit":
+            print("Exiting the program...")
             break
-        elif 'server' in command:
+        
+        # Handle specific commands
+        if 'server' in command:
             sub.run('npm start', shell=True)
-        elif 'bandwidth' in command: 
+
+        elif 'bandwidth' in command:
             bandwidth()
-            main()
-        elif any(word in command for word in ['game', 'minecraft']):
+
+        elif 'minecraft' in command or 'game' in command:
             Minecraft()
-            main()
-        elif any(word in command for word in ['time', 'show time', 'whats the time', 'tell the time']):
+
+        elif 'time' in command or 'whats the time' in command:
             Clock()
+
         elif 'interface' in command:
-            sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/Webchatbot.py',shell=True)
-            main()
+            sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/Webchatbot.py', shell=True)
+
         elif 'url locator' in command:
-            sub.run('cd search',shell=True)
+            sub.run('cd search', shell=True)
             sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/search/webCrawler.py', shell=True)
-            main()
+
         elif 'youtube' in command:
             pwk.Search_on_Youtube()
-            main()
+
         elif 'send email' in command:
             pwk.Mail()
-            main()
-        elif 'handwritting' in command:
+
+        elif 'handwriting' in command:
             pwk.Handwritting()
-            main()
+
         elif 'google' in command:
             pwk.search()
-            main()
+
         elif 'whatsapp' in command:
             pwk.Whatsapp_msg()
-            main()
-        elif "scan network" in command:
+
+        elif 'scan network' in command:
             NMAP()
-            main()
-        elif "security tools" in command:
-            talk("Starting OTXCLI") 
+
+        elif 'security tools' in command:
+            talk("Starting OTXCLI")
             cli = OTXCLI_App()
-            print('''
-                1. Ip Adresses 
-                2. Domain_name
-                3. URL
-                4. Hostname
-            ''')
-            Input = input("What do you want to scan/search : ")
+            print('1. Ip Addresses 2. Domain Name 3. URL 4. Hostname')
+            Input = input("What do you want to scan/search: ")
             if 'ip' in Input:
-                IP = input('Enter the IP Adresss : ')
+                IP = input('Enter the IP Address: ')
                 cli.process_ip(IP)
-            elif 'Domain' in  Input:
-                Domain_name = input('Enter the IP Adresss : ')
+            elif 'domain' in Input:
+                Domain_name = input('Enter the Domain Name: ')
                 cli.process_ip(Domain_name)
-            elif 'URL' in Input:
-                URL = input('Enter the IP Adresss : ')
+            elif 'url' in Input:
+                URL = input('Enter the URL: ')
                 cli.process_ip(URL)
-            elif 'Hostname' in Input:
-                Hostname = input('Enter the IP Adresss : ')
+            elif 'hostname' in Input:
+                Hostname = input('Enter the Hostname: ')
                 cli.process_ip(Hostname)
-            main()
-        elif "start a DOS attack" in command:
-            talk("Starting OTXCLI") 
+
+        elif 'start a dos attack' in command:
+            talk("Starting DOS")
             cli = OTXCLI_App()
-            print('''
-                1. SISP - Single IP Source Port Flood
-                2. SIMP - Single IP Source Ports Flood
-                3. MISP - Multiple Random Source IPs Flood
-                4. MIMP - Multiple Random Source IPs and Source Ports Flood
-            ''')
-            Input = input("What do you want to scan/search : ")
+            print('1. SISP - Single IP Source Port Flood')
+            print('2. SIMP - Single IP Source Ports Flood')
+            print('3. MISP - Multiple Random Source IPs Flood')
+            print('4. MIMP - Multiple Random Source IPs and Source Ports Flood')
+            Input = input("What do you want to scan/search: ")
             if 'SISP' in Input:
                 SISP()
-            elif 'SIMP' in  Input:
+            elif 'SIMP' in Input:
                 SIMP()
             elif 'MISP' in Input:
                 MISP()
             elif 'MIMP' in Input:
                 MIMP()
-            main()
+
+        elif 'start an encryption algorithm' in command:
+            talk("Starting encryption algorithm")
+            encrypted_message, Message = encrypt()
+            print(f"Encrypted Message: {encrypted_message}")
+            print(f"Original Message: {Message}")
+
+        elif 'start the tcp scanner' in command:
+            run()
+
         else:
+            # Default response if no specific command is found
             if command:  
                 ints = predict_class(command)
                 res = get_response(ints, intents)
                 talk(res)
                 print(res)
 
-        time.sleep(2)  
+        time.sleep(2)  # Delay between commands
+
+# Entry point of the program
 if __name__ == "__main__":
     main()

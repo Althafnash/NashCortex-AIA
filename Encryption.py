@@ -1,8 +1,8 @@
 Alpha = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-key_code = input("Enetr Key code : ")
-Message = input("Enter Password : ")
 
 def encrypt():
+    key_code = int(input("Enetr Key code : "))
+    Message = input("Enter Password : ")    
     encrypted_message = ""
     for letter in Message:
         if letter.upper() in Alpha:
@@ -16,8 +16,5 @@ def encrypt():
         else:
             encrypted_message += letter
     
-    return encrypted_message
+    return encrypted_message,Message
 
-encrypted_message = encrypt()
-print(f"Original message: {Message}")
-print(f"Encrypted message: {encrypted_message}")
