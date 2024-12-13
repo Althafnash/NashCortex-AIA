@@ -22,6 +22,9 @@ from TCPScanner import run
 from PortScanner import port_scanner,Live_port_scanner,Detailed_port_scanner
 import time
 
+nltk.download('punkt_tab')
+nltk.download('wordnet')
+
 # Initialize text-to-speech
 def talk(text):
     speak = pyttsx3.init()
@@ -66,26 +69,45 @@ def get_response(intents_list, intents_json):
 
 # Speech recognition
 listener = sr.Recognizer()
-
 def speechrecognition():
     command = ""
+    recognizer = sr.Recognizer()
+
     try:
         with sr.Microphone() as source:
-            print("You can start talking ...")
-            listener.adjust_for_ambient_noise(source, duration=2)  # Adjust ambient noise
-            voice = listener.listen(source, timeout=5, phrase_time_limit=10)
-            command = listener.recognize_google(voice).lower()
+            print("Adjusting for ambient noise, please wait...")
+            recognizer.adjust_for_ambient_noise(source, duration=1)
+            print("You can start talking...")
+            
+            # Listen for the user's input
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
+            print("Processing your input...")
+            
+            # Recognize speech using Google Web Speech API
+            command = recognizer.recognize_google(audio).lower()
+            print(f"Recognized Command: {command}")
+
+            # Remove wake word if present
             if 'jarvis' in command:
                 command = command.replace("jarvis", "").strip()
+
     except sr.UnknownValueError:
-        print("Sorry, I did not understand the command.")
-        talk("Sorry, I did not understand the command.")
+        # Handle case when speech is unintelligible
+        print("Sorry, I didn't catch that. Please repeat.")
+        talk("Sorry, I didn't catch that. Please repeat.")
     except sr.RequestError as e:
-        print(f"Could not request results from Google Speech Recognition service; {e}")
-        talk("There seems to be a network issue.")
+        # Handle API errors
+        print(f"Could not request results from Google Speech Recognition; {e}")
+        talk("It seems there is a network issue. Please check your connection.")
+    except sr.WaitTimeoutError:
+        # Handle timeout errors
+        print("I didn't hear anything. Please speak again.")
+        talk("I didn't hear anything. Please speak again.")
     except Exception as e:
-        print(f"An error occurred: {e}")
-        talk("An error occurred. Please try again.")
+        # Catch-all for unexpected errors
+        print(f"An unexpected error occurred: {e}")
+        talk("An unexpected error occurred. Please try again.")
+
     return command
 
 # Main function
@@ -108,106 +130,198 @@ def main():
         
         # Handle specific commands
         if 'server' in command:
-            sub.run('npm start', shell=True)
+            try:
+                sub.run('npm start', shell=True)
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'bandwidth' in command:
-            bandwidth()
+            try:
+                bandwidth()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'minecraft' in command or 'game' in command:
-            Minecraft()
+            try:
+                Minecraft()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'time' in command or 'whats the time' in command:
-            Clock()
+            try:
+                Clock()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'interface' in command:
-            sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/Webchatbot.py', shell=True)
+            try:
+                sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/Webchatbot.py', shell=True)
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()    
 
         elif 'url locator' in command:
-            sub.run('cd search', shell=True)
-            sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/search/webCrawler.py', shell=True)
+            try:
+                sub.run('cd search', shell=True)
+                sub.run('d:/NashBot/myenv/Scripts/python.exe d:/NashBot/search/webCrawler.py', shell=True)
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'youtube' in command:
-            pwk.Search_on_Youtube()
+            try:
+                pwk.Search_on_Youtube()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'send email' in command:
-            pwk.Mail()
+            try:
+                pwk.Mail()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'handwriting' in command:
-            pwk.Handwritting()
+            try:
+                pwk.Handwritting()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'google' in command:
-            pwk.search()
+            try:
+                pwk.search()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'whatsapp' in command:
-            pwk.Whatsapp_msg()
+            try:
+                pwk.Whatsapp_msg()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'scan network' in command:
-            NMAP()
+            try:
+                NMAP()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'security tools' in command:
-            talk("Starting OTXCLI")
-            cli = OTXCLI_App()
-            print('1. Ip Addresses 2. Domain Name 3. URL 4. Hostname')
-            Input = input("What do you want to scan/search: ")
-            if 'ip' in Input:
-                IP = input('Enter the IP Address: ')
-                cli.process_ip(IP)
-            elif 'domain' in Input:
-                Domain_name = input('Enter the Domain Name: ')
-                cli.process_ip(Domain_name)
-            elif 'url' in Input:
-                URL = input('Enter the URL: ')
-                cli.process_ip(URL)
-            elif 'hostname' in Input:
-                Hostname = input('Enter the Hostname: ')
-                cli.process_ip(Hostname)
+            try:
+                talk("Starting OTXCLI")
+                cli = OTXCLI_App()
+                print('1. Ip Addresses 2. Domain Name 3. URL 4. Hostname')
+                Input = input("What do you want to scan/search: ")
+                if 'ip' in Input:
+                    IP = input('Enter the IP Address: ')
+                    cli.process_ip(IP)
+                elif 'domain' in Input:
+                    Domain_name = input('Enter the Domain Name: ')
+                    cli.process_ip(Domain_name)
+                elif 'url' in Input:
+                    URL = input('Enter the URL: ')
+                    cli.process_ip(URL)
+                elif 'hostname' in Input:
+                    Hostname = input('Enter the Hostname: ')
+                    cli.process_ip(Hostname)
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'start a dos attack' in command:
-            talk("Starting DOS")
-            cli = OTXCLI_App()
-            print('1. SISP - Single IP Source Port Flood')
-            print('2. SIMP - Single IP Source Ports Flood')
-            print('3. MISP - Multiple Random Source IPs Flood')
-            print('4. MIMP - Multiple Random Source IPs and Source Ports Flood')
-            Input = input("What do you want to scan/search: ")
-            if 'SISP' in Input:
-                SISP()
-            elif 'SIMP' in Input:
-                SIMP()
-            elif 'MISP' in Input:
-                MISP()
-            elif 'MIMP' in Input:
-                MIMP()
+            try:
+                talk("Starting DOS")
+                cli = OTXCLI_App()
+                print('1. SISP - Single IP Source Port Flood')
+                print('2. SIMP - Single IP Source Ports Flood')
+                print('3. MISP - Multiple Random Source IPs Flood')
+                print('4. MIMP - Multiple Random Source IPs and Source Ports Flood')
+                Input = input("What do you want to scan/search: ")
+                if 'SISP' in Input:
+                    SISP()
+                elif 'SIMP' in Input:
+                    SIMP()
+                elif 'MISP' in Input:
+                    MISP()
+                elif 'MIMP' in Input:
+                    MIMP()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         elif 'start an encryption algorithm' in command:
-            talk("Starting encryption algorithm")
-            encrypted_message, Message = encrypt()
-            print(f"Encrypted Message: {encrypted_message}")
-            print(f"Original Message: {Message}")
+            try:
+                talk("Starting encryption algorithm")
+                encrypted_message, Message = encrypt()
+                print(f"Encrypted Message: {encrypted_message}")
+                print(f"Original Message: {Message}")
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
-        elif 'start the tcp scanner' in command:
-            run()
-
-        elif 'Start Port scanner' in command:
-            print('''
-                1. PortScanner - Normal Port scanner 
-                2. DetailedPortScaner - A detailed Port scanner which scans everything 
-                3. LivePortScanner - This scans the port live 
-            ''')
-            Input = input('Which port should I use : ')
-            if 'PortScanner' in command:
-                port_scanner()
-            elif 'DetailedPortScaner' in command:
-                Detailed_port_scanner()
-            elif 'LivePortScanner' in  command:
-                Live_port_scanner()
+        elif 'scan tcp packet' in command:
+            try:
+                talk("Starting TCP scanner")
+                run()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
+            
+        elif 'Scan ports' in command:
+            try:
+                talk("Starting port scanner")
+                print('''
+                    1. PortScanner - Normal Port scanner 
+                    2. DetailedPortScaner - A detailed Port scanner which scans everything 
+                    3. LivePortScanner - This scans the port live 
+                ''')
+                Input = input('Which port should I use : ')
+                if 'PortScanner' in command:
+                    port_scanner()
+                elif 'DetailedPortScaner' in command:
+                    Detailed_port_scanner()
+                elif 'LivePortScanner' in  command:
+                    Live_port_scanner()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
         else:
-            # Default response if no specific command is found
-            if command:  
-                ints = predict_class(command)
-                res = get_response(ints, intents)
-                talk(res)
-                print(res)
+            try:
+                # Default response if no specific command is found
+                if command:  
+                    ints = predict_class(command)
+                    res = get_response(ints, intents)
+                    talk(res)
+                    print(res)
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
 
         time.sleep(2)  # Delay between commands
 
