@@ -16,6 +16,7 @@ from clock import Clock
 from WSL import NMAP
 import speech_recognition as sr
 from OTXCLI.OTXCLI import OTXCLI_App
+from DOS import SISP,SIMP,MISP,MIMP
 import time
 
 def talk(text):
@@ -163,6 +164,25 @@ def main():
                 Hostname = input('Enter the IP Adresss : ')
                 cli.process_ip(Hostname)
             main()
+        elif "start a DOS attack" in command:
+            talk("Starting OTXCLI") 
+            cli = OTXCLI_App()
+            print('''
+                1. SISP - Single IP Source Port Flood
+                2. SIMP - Single IP Source Ports Flood
+                3. MISP - Multiple Random Source IPs Flood
+                4. MIMP - Multiple Random Source IPs and Source Ports Flood
+            ''')
+            Input = input("What do you want to scan/search : ")
+            if 'SISP' in Input:
+                SISP()
+            elif 'SIMP' in  Input:
+                SIMP()
+            elif 'MISP' in Input:
+                MISP()
+            elif 'MIMP' in Input:
+                MIMP()
+            main()
         else:
             if command:  
                 ints = predict_class(command)
@@ -171,6 +191,5 @@ def main():
                 print(res)
 
         time.sleep(2)  
-
 if __name__ == "__main__":
     main()
