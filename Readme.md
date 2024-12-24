@@ -24,6 +24,7 @@ Email
     - Encryption Algo 
     - TCP scanner 
     - Port scanner 
+    - Physisc Toolchain
 
 ## Python Libs used
 
@@ -47,3 +48,4 @@ Email
     - flask
     - requests
     - termcolor
+    - inquirer

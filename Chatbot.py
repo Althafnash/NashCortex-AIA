@@ -21,6 +21,7 @@ from Encryption import encrypt
 from TCPScanner import run
 from PortScanner import port_scanner,Live_port_scanner,Detailed_port_scanner
 from termcolor import colored
+from Physic_engine import engine
 import time
 
 nltk.download('punkt_tab')
@@ -107,7 +108,7 @@ def main():
     sub.run("cls", shell=True)
     string = strftime('%H:%M %p')
     print("=================================================================")
-    talk(f"Welcome back, sir. The time is {string}","blue")
+    talk(f"Welcome back, sir. The time is {string}")
     print("=================================================================")
     print(colored("Welcome back sir","blue"))
     print("=================================================================")
@@ -303,8 +304,19 @@ def main():
                 print(f'an error occured :: {e}')
                 talk('Restarting systems')
                 main()
+
+        elif 'start physics engine' in command:
+            try:
+                engine()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
+
         elif 'restart' in command:
             main()
+        elif 'exit' in command:
+            break
         else:
             try:
                 if command:  
