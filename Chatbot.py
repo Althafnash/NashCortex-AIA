@@ -21,7 +21,7 @@ from Encryption import encrypt
 from TCPScanner import run
 from PortScanner import port_scanner,Live_port_scanner,Detailed_port_scanner
 from termcolor import colored
-from Physic_engine import engine
+from Repo_modules import engine,Security
 import time
 
 nltk.download('punkt_tab')
@@ -313,6 +313,14 @@ def main():
                 talk('Restarting systems')
                 main()
 
+        elif 'start script' in command:
+            try:
+                Security()
+            except Exception as e:
+                print(f'an error occured :: {e}')
+                talk('Restarting systems')
+                main()
+
         elif 'restart' in command:
             main()
         elif 'exit' in command:
@@ -329,7 +337,7 @@ def main():
                 talk('Restarting systems')
                 main()
 
-        time.sleep(3)  
+        time.sleep(10)  
 
 if __name__ == "__main__":
     main()
