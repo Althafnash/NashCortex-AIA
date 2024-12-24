@@ -9,7 +9,8 @@ from keras.api.optimizers import SGD
 
 # Load data
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('data.json').read())
+with open('data.json', 'r', encoding='utf-8') as file:
+    intents = json.load(file)
 
 # Preprocess the data
 # Classes are the intents
@@ -46,21 +47,17 @@ for doc in documents:
     output_row[classes.index(doc[1])] = 1
     training.append([bag, output_row])
 
-# Shuffle the training data
 random.shuffle(training)
 
-# Split into input (X) and output (y)
 train_x = []
 train_y = []
 for feature, label in training:
     train_x.append(feature)
     train_y.append(label)
 
-# Convert to NumPy arrays
 train_x = np.array(train_x)
 train_y = np.array(train_y)
 
-# Build the model
 model = Sequential()
 model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu'))
 model.add(Dropout(0.5))
@@ -71,13 +68,10 @@ model.add(Dense(len(train_y[0]), activation='softmax'))
 sgd = SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-# Train the model
 model.fit(train_x, train_y, epochs=200, batch_size=5, verbose=1)
 
-# Save the model
 model.save('chatbot_model.h5')
 
-# Save the data structures
 import pickle
 pickle.dump(words, open('words.pkl', 'wb'))
 pickle.dump(classes, open('classes.pkl', 'wb'))

@@ -20,6 +20,7 @@ from DOS import SISP, SIMP, MISP, MIMP
 from Encryption import encrypt
 from TCPScanner import run
 from PortScanner import port_scanner,Live_port_scanner,Detailed_port_scanner
+from termcolor import colored
 import time
 
 nltk.download('punkt_tab')
@@ -67,7 +68,6 @@ def get_response(intents_list, intents_json):
             return random.choice(i['responses'])
     return "Sorry, I didn't get that."
 
-# Speech recognition
 listener = sr.Recognizer()
 def speechrecognition():
     command = ""
@@ -75,50 +75,43 @@ def speechrecognition():
 
     try:
         with sr.Microphone() as source:
-            print("Adjusting for ambient noise, please wait...")
+            print(colored("Adjusting for ambient noise, please wait...","blue"))
             recognizer.adjust_for_ambient_noise(source, duration=1)
-            print("You can start talking...")
-            
-            # Listen for the user's input
-            audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
-            print("Processing your input...")
-            
-            # Recognize speech using Google Web Speech API
-            command = recognizer.recognize_google(audio).lower()
-            print(f"Recognized Command: {command}")
+            print(colored("You can start talking...","green"))
 
-            # Remove wake word if present
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
+            print(colored("Processing your input...","blue"))
+
+            command = recognizer.recognize_google(audio).lower()
+            print(colored(f"Recognized Command: {command}","blue"))
+
             if 'jarvis' in command:
                 command = command.replace("jarvis", "").strip()
 
     except sr.UnknownValueError:
-        # Handle case when speech is unintelligible
-        print("Sorry, I didn't catch that. Please repeat.")
+        print(colored("Sorry, I didn't catch that. Please repeat.","yellow"))
         talk("Sorry, I didn't catch that. Please repeat.")
     except sr.RequestError as e:
-        # Handle API errors
-        print(f"Could not request results from Google Speech Recognition; {e}")
+        print(colored(f"Could not request results from Google Speech Recognition; {e}","yellow"))
         talk("It seems there is a network issue. Please check your connection.")
     except sr.WaitTimeoutError:
-        # Handle timeout errors
-        print("I didn't hear anything. Please speak again.")
+        print(colored("I didn't hear anything. Please speak again.","yellow"))
         talk("I didn't hear anything. Please speak again.")
     except Exception as e:
-        # Catch-all for unexpected errors
-        print(f"An unexpected error occurred: {e}")
+        print(colored(f"An unexpected error occurred: {e}","red"))
         talk("An unexpected error occurred. Please try again.")
 
     return command
 
-# Main function
 def main():
     sub.run("cls", shell=True)
     string = strftime('%H:%M %p')
-    talk(f"Welcome back, sir. The time is {string}")
     print("=================================================================")
-    print("Welcome back sir")
+    talk(f"Welcome back, sir. The time is {string}","blue")
     print("=================================================================")
-    print("Bot is running... (type 'quit' to exit or ctrl/cmd + c)")
+    print(colored("Welcome back sir","blue"))
+    print("=================================================================")
+    print(colored("Bot is running... (type 'quit' to exit or ctrl/cmd + c)","blue"))
     print("=================================================================")
 
     while True:
@@ -310,9 +303,10 @@ def main():
                 print(f'an error occured :: {e}')
                 talk('Restarting systems')
                 main()
+        elif 'restart' in command:
+            main()
         else:
             try:
-                # Default response if no specific command is found
                 if command:  
                     ints = predict_class(command)
                     res = get_response(ints, intents)
@@ -323,8 +317,7 @@ def main():
                 talk('Restarting systems')
                 main()
 
-        time.sleep(2)  # Delay between commands
+        time.sleep(3)  
 
-# Entry point of the program
 if __name__ == "__main__":
     main()

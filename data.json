@@ -6,6 +6,11 @@
             "responses": ["Hello!", "Hi there!", "Greetings!"]
         },
         {
+            "tag": "morning",
+            "patterns": [ "good morining","morning"],
+            "responses": ["Good morning sir!", "Good morning sir how may i assit you!"]
+        },
+        {
             "tag": "goodbye",
             "patterns": ["Bye", "See you later", "Goodbye"],
             "responses": ["Goodbye!", "See you later!"]
@@ -14,6 +19,11 @@
             "tag": "name",
             "patterns": ["what is your name", "what is ur name", "name"],
             "responses": ["My name is NashBot sir"]
+        },
+        {
+            "tag": "creator",
+            "patterns": ["what is creator name", "who made you"],
+            "responses": ["I am made my MohammeD Althaf"]
         },
         {
             "tag": "Webserver",
