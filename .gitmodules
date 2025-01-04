@@ -22,3 +22,6 @@
 [submodule "Nash-API"]
 	path = Nash-API
 	url = https://github.com/Althafnash/Nash-API.git
+[submodule "Blockchain"]
+	path = Blockchain
+	url = https://github.com/Althafnash/Blockchain.git
