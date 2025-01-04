@@ -23,8 +23,9 @@ from DOS import SISP, SIMP, MISP, MIMP
 from Encryption import encrypt
 from TCPScanner import run
 from PortScanner import port_scanner, Live_port_scanner, Detailed_port_scanner
-from Repo_modules import engine, Security
+from Repo_modules import engine, Security , Summrize , Hacknash
 import pywhatkit_utils as pwk
+
 
 # Initializing necessary components
 nltk.download('punkt', quiet=True)
@@ -118,7 +119,7 @@ def handle_command(command):
             pwk.Whatsapp_msg()
         elif 'scan network' in command:
             NMAP()
-        elif 'security tools' in command:
+        elif 'security tool' in command:
             handle_security_tools()
         elif 'start a dos attack' in command:
             handle_dos_tools()
@@ -134,15 +135,21 @@ def handle_command(command):
             engine()
         elif 'start script' in command:
             Security()
+        elif 'open summariser' in command:
+            print('strating summariser')
+            Summrize()
         elif 'restart' in command:
             main()
-        elif 'exit' in command:
+        elif 'exit'in command or 'quit' in command:
             exit_program()
+        elif 'Linux Hacker' in command:
+            Hacknash()
         else:
             handle_chatbot_response(command)
     except Exception as e:
         print(f"An error occurred: {e}")
         talk("Restarting systems")
+        time.sleep(10)
         main()
 
 def handle_security_tools():
@@ -202,7 +209,7 @@ def main():
     while True:
         command = recognize_speech()
         handle_command(command)
-        time.sleep(1)
+        time.sleep(10)
 
 if __name__ == "__main__":
     main()
