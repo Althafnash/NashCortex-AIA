@@ -1,0 +1,24 @@
+[submodule "OTXCLI"]
+	path = OTXCLI
+	url = https://github.com/Althafnash/OTXCLI.git
+[submodule "Firewall"]
+	path = Firewall
+	url = https://github.com/Althafnash/Firewall.git
+[submodule "PhysiscToolchain-"]
+	path = PhysiscToolchain-
+	url = https://github.com/Althafnash/PhysiscToolchain-.git
+[submodule "SecurityToolchain"]
+	path = SecurityToolchain
+	url = https://github.com/Althafnash/SecurityToolchain.git
+[submodule "Summerizer"]
+	path = Summerizer
+	url = https://github.com/Althafnash/Summerizer.git
+[submodule "PS_Manger"]
+	path = PS_Manger
+	url = https://github.com/Althafnash/PS_Manger.git
+[submodule "Hacknash"]
+	path = Hacknash
+	url = https://github.com/Althafnash/Hacknash.git
+[submodule "Nash-API"]
+	path = Nash-API
+	url = https://github.com/Althafnash/Nash-API.git
