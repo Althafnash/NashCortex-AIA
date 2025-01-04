@@ -23,7 +23,7 @@ from DOS import SISP, SIMP, MISP, MIMP
 from Encryption import encrypt
 from TCPScanner import run
 from PortScanner import port_scanner, Live_port_scanner, Detailed_port_scanner
-from Repo_modules import engine, Security , Summrize , Hacknash , PS_Manger
+from Repo_modules import engine, Security , Summrize , Hacknash , PS_Manger , NashAPI
 import pywhatkit_utils as pwk
 
 
@@ -146,6 +146,8 @@ def handle_command(command):
             Hacknash()
         elif 'powershell manager' in command:
             PS_Manger()
+        elif "application" in command:
+            NashAPI()
         else:
             handle_chatbot_response(command)
     except Exception as e:

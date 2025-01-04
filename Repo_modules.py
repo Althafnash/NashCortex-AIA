@@ -18,3 +18,8 @@ def PS_Manger():
     if os.name == "nt":
         sub.run("cls",shell=True)
         sub.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", 'PS_Manger\PS_Manger.ps1'],shell=True ,capture_output=True, text=True) 
+
+def NashAPI():
+    os.chdir("Nash-API")
+    os.chdir("NashAPI")
+    sub.run("dotnet run",shell=True)
