@@ -13,3 +13,8 @@ def Summrize():
 def Hacknash():
     if os.name == "Linux":
         sub.run('Hacknash.sh',shell=True) 
+
+def PS_Manger():
+    if os.name == "nt":
+        sub.run("cls",shell=True)
+        sub.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", 'PS_Manger\PS_Manger.ps1'],shell=True ,capture_output=True, text=True) 
